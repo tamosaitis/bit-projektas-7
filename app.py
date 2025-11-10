@@ -122,8 +122,7 @@ def main():
         api_key = st.text_input(
             "API Key (Optional)",
             type="password",
-            help="Enter your API key if using external models. Not required for local Ollama.",
-            placeholder="sk-or-v1-..."
+            help="Enter your API key if using external models. Not required for local Ollama."
         )
         
         # Model selection
@@ -151,72 +150,73 @@ def main():
     # Main questionnaire
     st.header("📋 Personal Information Questionnaire")
     
-    with st.form("workout_questionnaire", clear_on_submit=False):
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            # Question 1: Age
-            age = st.number_input(
-                "1. What is your age?",
-                min_value=16,
-                max_value=80,
-                value=25,
-                step=1,
-                help="Enter your age in years (numbers only)",
-                placeholder="e.g., 25"
-            )
-            
-            # Question 3: Time available
-            time_available = st.selectbox(
-                "3. How much time can you spend on workouts daily?",
-                options=[
-                    "15-30 minutes",
-                    "30-45 minutes", 
-                    "45-60 minutes",
-                    "60-90 minutes",
-                    "More than 90 minutes"
-                ],
-                help="Select the amount of time you can realistically dedicate to exercise each day"
-            )
-        
-        with col2:
-            # Question 2: Health problems
-            health_problems = st.text_area(
-                "2. Do you have any known health problems?",
-                height=100,
-                help="Please list any health conditions, injuries, or physical limitations we should consider",
-                placeholder="e.g., Lower back pain, knee injury, high blood pressure, or write 'None' if no health issues"
-            )
-            
-            # Question 4: Goal
-            goal = st.radio(
-                "4. What is your primary fitness goal?",
-                options=["Lose weight", "Gain muscle"],
-                help="Choose your main objective - this will determine the focus of your workout plan"
-            )
-        
-        # Submit button
-        submitted = st.form_submit_button(
-            "🚀 Generate My Workout Plan", 
-            type="primary",
-            use_container_width=True
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        # Question 1: Age
+        age = st.number_input(
+            "1. What is your age?",
+            min_value=16,
+            max_value=80,
+            value=25,
+            step=1,
+            help="Enter your age in years (numbers only)",
+            key="age_input"
         )
         
-        if submitted:
-            # Validate inputs
-            if not health_problems.strip():
-                st.error("Please fill in the health problems field (write 'None' if you have no health issues)")
-            else:
-                # Store user data
-                st.session_state.user_data = {
-                    "age": age,
-                    "health_problems": health_problems,
-                    "time_available": time_available,
-                    "goal": goal
-                }
-                
-                st.session_state.workout_plan_generated = True
-                st.rerun()
+        # Question 3: Time available
+        time_available = st.selectbox(
+            "3. How much time can you spend on workouts daily?",
+            options=[
+                "15-30 minutes",
+                "30-45 minutes", 
+                "45-60 minutes",
+                "60-90 minutes",
+                "More than 90 minutes"
+            ],
+            help="Select the amount of time you can realistically dedicate to exercise each day",
+            key="time_input"
+        )
+    
+    with col2:
+        # Question 2: Health problems
+        health_problems = st.text_area(
+            "2. Do you have any known health problems?",
+            height=100,
+            help="Please list any health conditions, injuries, or physical limitations we should consider",
+            key="health_input"
+        )
+        
+        # Question 4: Goal
+        goal = st.radio(
+            "4. What is your primary fitness goal?",
+            options=["Lose weight", "Gain muscle"],
+            help="Choose your main objective - this will determine the focus of your workout plan",
+            key="goal_input"
+        )
+    
+    # Submit button
+    submitted = st.button(
+        "🚀 Generate My Workout Plan", 
+        type="primary",
+        use_container_width=True
+    )
+    
+    if submitted:
+        # Validate inputs
+        if not health_problems.strip():
+            st.error("Please fill in the health problems field (write 'None' if you have no health issues)")
+        else:
+            # Store user data
+            st.session_state.user_data = {
+                "age": age,
+                "health_problems": health_problems,
+                "time_available": time_available,
+                "goal": goal
+            }
+            
+            st.session_state.workout_plan_generated = True
+            st.rerun()
     
     # Generate and display workout plan
     if st.session_state.workout_plan_generated and st.session_state.user_data:
