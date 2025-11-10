@@ -1,5 +1,11 @@
 # 💪 Workout Plan Composer - UAB Sveikata
 
+## 📝 Studento komentaras
+
+*Užduotis aiški, viskas sklandžiai. Kadangi klausimai aiškūs, neįdėjau chato ir palikau tik fiksuotus klausimus (su užuominom) kurių reikia sporto plano sudarymui. Tik nuo pradžiu su Github kažką susivėliau :D*
+
+---
+
 A personalized AI-powered workout plan generator that creates customized 7-day fitness routines based on individual user profiles. Built with Streamlit and powered by Ollama's local AI models.
 
 ## 🌟 Features
