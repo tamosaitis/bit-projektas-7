@@ -1,0 +1,18 @@
+Create agent which would give user work out plan for 1 week (7 days) after user answer all questions.
+The agent must:
+use Streamlit to create a web interface
+Use Ollama model gemma3:4b
+The api key must be passed in the web interface and user can choose from free AI models.
+
+Ask user 4 questions: 
+1. Age. (years - only numbers allowed)
+2. Known health problems.
+3. How much time user can spend everyday for workout. 
+4. What is user goal with workout: Loose weight or Gain muscle. (choose only from two options)
+
+Add placeholders/hints for user, for every field for better understanding.
+
+Agent, first, must introduce himself and write short info about this program.
+Agent must mention that it is company "UAB Sveikata" in the introduction.
+
+
